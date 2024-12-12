@@ -7,7 +7,7 @@ const app = express();
 
 app.use(express.json());
 
-app.get("api/v1/books", books.findBooks);
+app.get("/api/v1/books", books.findBooks);
 
 app.listen(port, (error) => {
   if (error) {

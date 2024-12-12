@@ -1,5 +1,5 @@
 import axios from "axios";
-import api from "config/properties";
+import { api } from "../config/properties";
 
 export const searchQuery = async (query) => {
   try {
@@ -15,7 +15,7 @@ export const searchQuery = async (query) => {
 
     return res.data;
   } catch (error) {
-    alert("Error searching for mentors:", error.message);
+    alert("Error searching for books:", error.message);
     throw error;
   }
 };

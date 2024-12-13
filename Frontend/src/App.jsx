@@ -1,8 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Search } from "./components/search/Search";
 import { BookList } from "./components/booklist/BookList";
 import { searchQuery } from "./api/searchApi";
-
 import "./App.css";
 
 const App = () => {
@@ -22,10 +21,10 @@ const App = () => {
 
   return (
     <div className="app">
-      <h1>Search the Library</h1>
+      <h1 className="app__title">Search the Library</h1>
       <Search onSearch={handleSearch} />
       {error && <p className="error-message">{error}</p>}
-      <BookList books={books} />
+      <BookList books={books} query={handleSearch} />
     </div>
   );
 };

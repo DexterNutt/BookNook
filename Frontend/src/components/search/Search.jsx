@@ -14,7 +14,7 @@ export const Search = ({ onSearch }) => {
       <input
         className="search-bar__input"
         type="text"
-        placeholder="Search by Title, Author, or Genre"
+        placeholder="Search the library..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />

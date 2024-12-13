@@ -3,6 +3,7 @@ const booksJson = require("./books.json");
 exports.findBooks = async (req, res) => {
   try {
     const searchTerm = req.query.search?.toLowerCase();
+
     const books = booksJson;
 
     const foundBooks = books.filter(

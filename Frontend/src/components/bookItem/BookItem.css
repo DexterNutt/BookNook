@@ -6,7 +6,8 @@
   margin: 8px 0;
   border: 1px solid #ddd;
   border-radius: 8px;
-  background-color: #f9f9f9;
+  background-color: #fff;
+  width: 100%;
   transition: box-shadow 0.3s, transform 0.3s;
 }
 
@@ -37,6 +38,6 @@
 }
 
 .highlight {
-  color: red;
+  color: #9d1b18;
   font-weight: bold;
 }

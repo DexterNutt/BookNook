@@ -5,13 +5,13 @@ export const BookItem = ({ book, query }) => {
   const { title, author, genre } = book;
 
   const highlightText = (text, query) => {
-    if (!query) return text;
+    // function to see which part of the text in the book details matches to the query
+    // if (!query) return text;
 
     const regex = new RegExp(`(${query})`, "gi");
     const parts = text.split(regex);
 
-    console.log({ query, text, parts });
-
+    // then add a strong HTML tag to exact matches
     return parts.map((part, index) =>
       regex.test(part) ? (
         <strong key={index} className="highlight">
@@ -23,11 +23,12 @@ export const BookItem = ({ book, query }) => {
     );
   };
 
+  // finally render the book with the highlighted text
   return (
     <li className="book-item">
-      <h3 className="book-item__title">{highlightText(title, query)}</h3>
+      <h3 className="book-item__title"> {highlightText(title, query)}</h3>
       <p className="book-item__author">{highlightText(author, query)}</p>
-      <p className="book-item__genre">{highlightText(genre, query)}</p>
+      <p className="book-item__genre"> {highlightText(genre, query)}</p>
     </li>
   );
 };

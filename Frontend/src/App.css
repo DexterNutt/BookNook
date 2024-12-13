@@ -15,3 +15,8 @@
   font-size: 2rem;
   color: #333;
 }
+
+.error-message {
+  text-align: center;
+  margin-top: 20px;
+}

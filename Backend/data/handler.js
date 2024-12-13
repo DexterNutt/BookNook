@@ -14,12 +14,11 @@ exports.findBooks = async (req, res) => {
     );
 
     if (foundBooks.length === 0) {
-      return res.status(404).json({ message: "No books found" });
+      return res.status(404).json({ message: "No books found!" });
     }
 
     res.status(200).json(foundBooks);
   } catch (error) {
-    console.error("Error searching for mentors:", error);
     return res
       .status(500)
       .json({ message: "Error searching for books in the library" });

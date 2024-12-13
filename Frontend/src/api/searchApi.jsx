@@ -15,7 +15,9 @@ export const searchQuery = async (query) => {
 
     return res.data;
   } catch (error) {
-    alert("Error searching for books:", error.message);
+    if (error.response?.status === 404) {
+      return [];
+    }
     throw error;
   }
 };

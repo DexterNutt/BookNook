@@ -6,10 +6,12 @@ import "./App.css";
 
 const App = () => {
   const [books, setBooks] = useState([]);
+  const [query, setQuery] = useState("");
   const [error, setError] = useState(null);
 
   const handleSearch = async (query) => {
     try {
+      setQuery(query);
       const results = await searchQuery(query);
       setBooks(results);
       setError(null);
@@ -24,7 +26,7 @@ const App = () => {
       <h1 className="app__title">Search the Library</h1>
       <Search onSearch={handleSearch} />
       {error && <p className="error-message">{error}</p>}
-      <BookList books={books} query={handleSearch} />
+      <BookList books={books} query={query} />
     </div>
   );
 };

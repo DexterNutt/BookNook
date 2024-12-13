@@ -2,24 +2,26 @@ import React from "react";
 import "./BookItem.css";
 
 export const BookItem = ({ book, query }) => {
+  const { title, author, genre } = book;
+
   const highlightText = (text, query) => {
     if (!query) return text;
 
     const regex = new RegExp(`(${query})`, "gi");
     const parts = text.split(regex);
 
+    console.log({ query, text, parts });
+
     return parts.map((part, index) =>
       regex.test(part) ? (
-        <span key={index} style={{ fontWeight: "bold", color: "red" }}>
+        <strong key={index} className="highlight">
           {part}
-        </span>
+        </strong>
       ) : (
         part
       )
     );
   };
-
-  const { title, author, genre } = book;
 
   return (
     <li className="book-item">

@@ -36,9 +36,7 @@
   font-style: italic;
 }
 
-.book-item__title strong,
-.book-item__author strong,
-.book-item__genre strong {
+.highlight {
   color: red;
   font-weight: bold;
 }

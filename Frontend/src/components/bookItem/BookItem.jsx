@@ -6,8 +6,6 @@ export const BookItem = ({ book, query }) => {
 
   const highlightText = (text, query) => {
     // function to see which part of the text in the book details matches to the query
-    // if (!query) return text;
-
     const regex = new RegExp(`(${query})`, "gi");
     const parts = text.split(regex);
 

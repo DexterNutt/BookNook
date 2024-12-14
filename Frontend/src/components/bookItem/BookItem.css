@@ -3,12 +3,11 @@
   flex-direction: column;
   gap: 8px;
   padding: 16px;
-  margin: 8px 0;
+  background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
-  background-color: #fff;
-  width: 100%;
   transition: box-shadow 0.3s, transform 0.3s;
+  flex: 0 1 calc(25% - 2rem);
 }
 
 .book-item:hover {
@@ -40,4 +39,22 @@
 .highlight {
   color: #9d1b18;
   font-weight: bold;
+}
+
+@media (max-width: 1350px) {
+  .book-item {
+    flex: 0 1 calc(33.33% - 2rem);
+  }
+}
+
+@media (max-width: 1000px) {
+  .book-item {
+    flex: 0 1 calc(50% - 2rem);
+  }
+}
+
+@media (max-width: 650px) {
+  .book-item {
+    flex: 0 1 calc(100% - 5rem);
+  }
 }

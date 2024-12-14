@@ -1,12 +1,46 @@
+const fs = require("fs");
+const Papa = require("papaparse");
 const booksJson = require("./books.json");
+const csvFilePath = "./data/books.csv";
+
+let mergedBooks = [];
+
+const mergeBooks = () => {
+  try {
+    const csvData = fs.readFileSync(csvFilePath, "utf-8");
+
+    const parsedCSV = Papa.parse(csvData, {
+      header: true,
+      skipEmptyLines: true,
+    });
+
+    const booksCsv = parsedCSV.data.map((book) => ({
+      id: Number(book.id),
+      title: book.title,
+      author: book.author,
+      genre: book.genre,
+    }));
+
+    const bookMap = new Map();
+
+    booksJson.forEach((jsonBook) => bookMap.set(jsonBook.id, jsonBook));
+    booksCsv.forEach((csvBook) => bookMap.set(csvBook.id, csvBook));
+
+    mergedBooks = Array.from(bookMap.values());
+
+    return mergedBooks;
+  } catch (error) {
+    console.error("Error while parsing and merging:", error);
+  }
+};
+
+mergeBooks();
 
 exports.findBooks = async (req, res) => {
   try {
     const searchTerm = req.query.search?.toLowerCase();
 
-    const books = booksJson;
-
-    const foundBooks = books.filter(
+    const foundBooks = mergedBooks.filter(
       ({ title, author, genre }) =>
         title.toLowerCase().includes(searchTerm) ||
         author.toLowerCase().includes(searchTerm) ||

@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const books = require("./data/handler");
+const books = require("./data/searchHandler");
 
 const port = 3000;
 

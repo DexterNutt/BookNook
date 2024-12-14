@@ -7,13 +7,14 @@ let mergedBooks = [];
 
 const mergeBooks = () => {
   try {
+    // Read the CSV data with papaparse
     const csvData = fs.readFileSync(csvFilePath, "utf-8");
-
     const parsedCSV = Papa.parse(csvData, {
       header: true,
       skipEmptyLines: true,
     });
 
+    // Set the csv data in an object
     const booksCsv = parsedCSV.data.map((book) => ({
       id: Number(book.id),
       title: book.title,
@@ -21,11 +22,12 @@ const mergeBooks = () => {
       genre: book.genre,
     }));
 
+    // Compare the books in the JSON and parsedCSV objects in a Map dataset (if there are differences, it will add the missing books in the central bookMap)
     const bookMap = new Map();
-
     booksJson.forEach((jsonBook) => bookMap.set(jsonBook.id, jsonBook));
     booksCsv.forEach((csvBook) => bookMap.set(csvBook.id, csvBook));
 
+    // Convert the map in an array
     mergedBooks = Array.from(bookMap.values());
 
     return mergedBooks;

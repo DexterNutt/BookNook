@@ -18,7 +18,7 @@ const App = () => {
       setIsSearching(true);
       setError("");
 
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulating a longer search...
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // 1 second timeout function to simulate a longer search
 
       const results = await searchQuery(query); // Dispatch the query to the api
 
@@ -45,6 +45,7 @@ const App = () => {
     setSortOption(option);
   };
 
+  // Sorting function to arrange the received books alphabetically
   const sortedBooks = [...books].sort((bookA, bookB) => {
     const bookA_Comparison = bookA[sortOption].toLowerCase();
     const bookB_Comparison = bookB[sortOption].toLowerCase();

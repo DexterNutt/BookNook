@@ -20,6 +20,7 @@ export const Search = ({ onSearch, sortValue, onSortChange }) => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
+
         <SortDropdown value={sortValue} handleChange={onSortChange} />
       </div>
       <button className="search-bar__button" type="submit">

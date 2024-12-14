@@ -16,26 +16,24 @@ const App = () => {
       setIsSearching(true);
       setError("");
 
-      const results = await new Promise((res) => {
-        setTimeout(async () => {
-          const queryResult = await searchQuery(query);
-          res(queryResult);
-        }, 750);
-      }); // Send the query to the api with a timeout function to show the loading
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulating a longer search...
+
+      const results = await searchQuery(query); // Dispatch the query to the api
 
       if (results.length === 0) {
-        // First check if the server finds something, if not set error
-        setError("No results found.");
+        // First check if the server finds something, if not set error and remove any previous found books
+        setError("No results found");
         setBooks([]);
       } else {
-        // If it found something, update state
+        // If it found something, update state with the books
         setBooks(results);
         setError("");
       }
     } catch (error) {
-      setError("Failed to fetch books.");
+      setError(
+        "Our Librarian is on a break, please try again in a few minutes"
+      );
       setBooks([]);
-      setIsSearching(false);
     } finally {
       setIsSearching(false);
     }
@@ -45,7 +43,7 @@ const App = () => {
     <div className="app">
       <h1 className="app__title">Search the Library</h1>
       <Search onSearch={handleSearch} />
-      {isSearching && <p className="spinner">Loading...</p>}
+      {isSearching && <p className="spinner">Searching the Library...</p>}
       {error && <p className="error-message">{error}</p>}
       <BookList books={books} query={query} />
     </div>

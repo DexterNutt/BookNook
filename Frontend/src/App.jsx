@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Search } from "./components/search/Search";
 import { BookList } from "./components/booklist/BookList";
+import { SortDropdown } from "./components/sortDropdown/SortDropdown";
 import { searchQuery } from "./api/searchApi";
 import "./App.css";
 
@@ -9,6 +10,7 @@ const App = () => {
   const [query, setQuery] = useState("");
   const [error, setError] = useState("");
   const [isSearching, setIsSearching] = useState(false);
+  const [sortOption, setSortOption] = useState("author");
 
   const handleSearch = async (query) => {
     try {
@@ -39,13 +41,30 @@ const App = () => {
     }
   };
 
+  const handleSortChange = (option) => {
+    setSortOption(option);
+  };
+
+  const sortedBooks = [...books].sort((bookA, bookB) => {
+    const bookA_Comparison = bookA[sortOption].toLowerCase();
+    const bookB_Comparison = bookB[sortOption].toLowerCase();
+    return bookA_Comparison.localeCompare(bookB_Comparison);
+  });
+
   return (
     <div className="app">
-      <h1 className="app__title">Search the Library</h1>
-      <Search onSearch={handleSearch} />
+      <h1 className="app__title">Book Nook</h1>
+
+      <Search
+        onSearch={handleSearch}
+        sortValue={sortOption}
+        onSortChange={handleSortChange}
+      />
+
       {isSearching && <p className="spinner">Searching the Library...</p>}
       {error && <p className="error-message">{error}</p>}
-      <BookList books={books} query={query} />
+
+      <BookList books={sortedBooks} query={query} />
     </div>
   );
 };

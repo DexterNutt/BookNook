@@ -1,0 +1,36 @@
+.sort-dropdown {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  margin-left: -8.5rem;
+}
+
+.sort-dropdown__select {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-left: none;
+  border-radius: 5px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  cursor: pointer;
+  transition: border-color 0.3s ease-in-out;
+  background-color: #fff;
+  color: #9d1b18;
+}
+
+.sort-dropdown__select:focus {
+  border-color: #9d1b18;
+  outline: none;
+}
+
+@media (max-width: 700px) {
+  .sort-dropdown {
+    margin-left: -5rem;
+  }
+
+  .sort-dropdown__select {
+    width: 5rem;
+  }
+}

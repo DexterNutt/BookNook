@@ -15,6 +15,30 @@
   color: #fff;
 }
 
+.app {
+  text-align: center;
+  padding: 1rem;
+}
+
+.app__title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.search-sort-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 35rem;
+  margin: 0 auto 2rem;
+  gap: 1rem;
+}
+
+.error-message {
+  font-size: 1.2rem;
+}
+
 .spinner {
   color: #fff;
   text-align: center;

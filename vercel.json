@@ -1,4 +1,11 @@
 {
+  "builds": [
+    {
+      "src": "Frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
+    }
+  ],
   "routes": [{ "src": "api/(.*)", "dest": "/api/$1" }],
   "functions": {
     "api/books.js": { "memory": 512, "maxDuration": 10 }

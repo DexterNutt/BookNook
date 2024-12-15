@@ -5,7 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "frontend": "cd Frontend && npm run dev",
-    "start": "concurrently \"vercel dev\" \"npm run frontend\""
+    "start": "concurrently \"vercel dev\" \"npm run frontend\"",
+    "build": "cd Frontend && npm run build"
   },
   "repository": {
     "type": "git",

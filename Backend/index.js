@@ -1,6 +1,10 @@
 const express = require("express");
 const cors = require("cors");
 const books = require("./data/searchHandler");
+const dotenv = require("dotenv");
+
+dotenv.config({ path: `${__dirname}/config/config.env` });
+
 const BOOK_NOOK_PORT = process.env.PORT;
 
 const app = express();

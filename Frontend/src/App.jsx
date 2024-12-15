@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Search } from "./components/search/Search";
 import { BookList } from "./components/booklist/BookList";
-import { SortDropdown } from "./components/sortDropdown/SortDropdown";
 import { searchQuery } from "./api/searchApi";
 import "./App.css";
 
@@ -12,22 +11,34 @@ const App = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [sortOption, setSortOption] = useState("author");
 
+  useEffect(() => {
+    const fetchBooks = async () => {
+      try {
+        const results = await searchQuery(query);
+        setBooks(results);
+        console.log("RESULT", results);
+      } catch (error) {
+        setError("Failed to load books. Please try again later.");
+      }
+    };
+
+    fetchBooks();
+  }, []);
+
   const handleSearch = async (query) => {
     try {
       setQuery(query);
       setIsSearching(true);
       setError("");
 
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // 1 second timeout function to simulate a longer search
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate loading
 
-      const results = await searchQuery(query); // Dispatch the query to the api
+      const results = await searchQuery(query);
 
       if (results.length === 0) {
-        // First check if the server finds something, if not set error and remove any previous found books
         setError("No results found");
         setBooks([]);
       } else {
-        // If it found something, update state with the books
         setBooks(results);
         setError("");
       }

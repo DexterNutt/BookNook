@@ -1,19 +1,46 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./SortDropdown.css";
 
 export const SortDropdown = ({ value, handleChange }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleOptionClick = (selectedValue) => {
+    handleChange(selectedValue);
+    setIsOpen(false);
+  };
+
   return (
-    <div className="sort-dropdown">
-      <select
-        id="sort-options"
-        className="sort-dropdown__select"
-        value={value}
-        onChange={(e) => handleChange(e.target.value)}
-      >
-        <option value="author">Author Name</option>
-        <option value="title">Title</option>
-        <option value="genre">Genre</option>
-      </select>
+    <div className="sort" ref={dropdownRef}>
+      <div className="sort__selected" onClick={() => setIsOpen(!isOpen)}>
+        {value.toUpperCase()}
+      </div>
+      {isOpen && (
+        <ul className="sort__list">
+          <li
+            className="sort__item"
+            onClick={() => handleOptionClick("author")}
+          >
+            Author Name
+          </li>
+          <li className="sort__item" onClick={() => handleOptionClick("title")}>
+            Title
+          </li>
+          <li className="sort__item" onClick={() => handleOptionClick("genre")}>
+            Genre
+          </li>
+        </ul>
+      )}
     </div>
   );
 };

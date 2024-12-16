@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { SortDropdown } from "../sortDropdown/SortDropdown";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import "./Search.css";
 
 export const Search = ({ onSearch, sortValue, onSortChange }) => {
@@ -11,19 +13,21 @@ export const Search = ({ onSearch, sortValue, onSortChange }) => {
   };
 
   return (
-    <form className="search-bar" onSubmit={handleSubmit}>
-      <div className="search-bar__container">
-        <input
-          className="search-bar__input"
-          type="text"
-          placeholder="Search the library..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-
-        <SortDropdown value={sortValue} handleChange={onSortChange} />
+    <form className="search" onSubmit={handleSubmit}>
+      <div className="search__bar">
+        <div className="search__bar-container">
+          <SortDropdown value={sortValue} handleChange={onSortChange} />
+          <input
+            className="search__input"
+            type="text"
+            placeholder="Search the library..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          <FontAwesomeIcon className="search__icon" icon={faMagnifyingGlass} />
+        </div>
       </div>
-      <button className="search-bar__button" type="submit">
+      <button className="search__button" type="submit">
         Search
       </button>
     </form>

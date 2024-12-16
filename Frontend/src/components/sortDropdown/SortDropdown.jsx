@@ -3,6 +3,7 @@ import "./SortDropdown.css";
 
 export const SortDropdown = ({ value, handleChange }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedSort, setSelectedSort] = useState(false);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -17,13 +18,14 @@ export const SortDropdown = ({ value, handleChange }) => {
 
   const handleOptionClick = (selectedValue) => {
     handleChange(selectedValue);
+    setSelectedSort(true);
     setIsOpen(false);
   };
 
   return (
     <div className="sort" ref={dropdownRef}>
       <div className="sort__selected" onClick={() => setIsOpen(!isOpen)}>
-        {value.toUpperCase()}
+        {!selectedSort ? "SORT BY" : value.toUpperCase()}
       </div>
       {isOpen && (
         <ul className="sort__list">

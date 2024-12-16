@@ -2,60 +2,60 @@ import React, { useState, useEffect } from "react";
 import { Search } from "./components/search/Search";
 import { BookList } from "./components/booklist/BookList";
 import { searchQuery } from "./api/searchApi";
+import useDebounce from "./components/hooks/useDebounce";
+
 import "./App.css";
 
 const App = () => {
   const [books, setBooks] = useState([]);
   const [query, setQuery] = useState("");
   const [error, setError] = useState("");
-  const [isSearching, setIsSearching] = useState(false);
+  // const [isSearching, setIsSearching] = useState(false);
   const [sortOption, setSortOption] = useState("author");
+
+  const debouncedQuery = useDebounce(query, 500);
 
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const results = await searchQuery(query);
-        setBooks(results);
+        // setIsSearching(true);
+        setError("");
+
+        if (debouncedQuery === "") {
+          setBooks([]);
+          return;
+        }
+
+        const results = await searchQuery(debouncedQuery);
+
+        if (results.length === 0) {
+          setError("No results found");
+          setBooks([]);
+        } else {
+          setBooks(results);
+          setError("");
+        }
       } catch (error) {
-        setError("Failed to load books. Please try again later.");
+        setError(
+          "Our Librarian is on a break, please try again in a few minutes."
+        );
+        setBooks([]);
+      } finally {
+        // setIsSearching(false);
       }
     };
 
-    fetchBooks();
-  }, []);
+    fetchBooks(debouncedQuery);
+  }, [debouncedQuery]);
 
-  const handleSearch = async (query) => {
-    try {
-      setQuery(query);
-      setIsSearching(true);
-      setError("");
-
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate loading
-
-      const results = await searchQuery(query);
-
-      if (results.length === 0) {
-        setError("No results found");
-        setBooks([]);
-      } else {
-        setBooks(results);
-        setError("");
-      }
-    } catch (error) {
-      setError(
-        "Our Librarian is on a break, please try again in a few minutes"
-      );
-      setBooks([]);
-    } finally {
-      setIsSearching(false);
-    }
+  const handleSearch = (newQuery) => {
+    setQuery(newQuery);
   };
 
   const handleSortChange = (option) => {
     setSortOption(option);
   };
 
-  // Sorting function to arrange the received books alphabetically
   const sortedBooks = [...books].sort((bookA, bookB) => {
     const bookA_Comparison = bookA[sortOption].toLowerCase();
     const bookB_Comparison = bookB[sortOption].toLowerCase();
@@ -67,12 +67,11 @@ const App = () => {
       <h1 className="app__title">Book Nook</h1>
 
       <Search
-        onSearch={handleSearch}
         sortValue={sortOption}
         onSortChange={handleSortChange}
+        onChange={handleSearch}
       />
 
-      {isSearching && <p className="spinner">Searching the Library...</p>}
       {error && <p className="error-message">{error}</p>}
 
       <BookList books={sortedBooks} query={query} />

@@ -13,6 +13,8 @@
 .book-item:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transform: translateY(-2px);
+  background-color: #fff0f0;
+  color: #9d1b18;
 }
 
 .book-item__title {

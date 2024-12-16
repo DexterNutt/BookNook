@@ -1,6 +1,6 @@
-# Library BookNook
+# BookNook
 
-**Library BookNook** is a web application designed to help users search, sort, and explore books. It is hosted on Vercel, leveraging serverless functions for backend functionality and React for the frontend.
+**BookNook** is a web application designed to help users search, sort, and explore books. It is hosted on Vercel, leveraging serverless functions for backend functionality and React for the frontend.
 While coding this little app I learned host serverless applications with Vercel, and implement better search functionality in my projects with the debounce custom hook.
 
 ### Live Demo

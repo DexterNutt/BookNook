@@ -33,7 +33,7 @@ Ensure you have the following installed:
 1. **Clone the repository**:
 
    ```bash
-   https://github.com/DexterNutt/BookNook.git
+   git clone https://github.com/DexterNutt/BookNook.git
    cd BookNook
    ```
 

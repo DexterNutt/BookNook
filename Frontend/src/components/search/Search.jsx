@@ -25,7 +25,7 @@ export const Search = ({ onChange, sortValue, onSortChange }) => {
         <input
           className="search__input"
           type="text"
-          placeholder="Search the library..."
+          placeholder="Search or hit space to see the library..."
           value={query}
           onChange={handleInputChange}
         />

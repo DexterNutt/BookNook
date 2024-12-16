@@ -10,7 +10,7 @@ const App = () => {
   const [books, setBooks] = useState([]);
   const [query, setQuery] = useState("");
   const [error, setError] = useState("");
-  // const [isSearching, setIsSearching] = useState(false);
+  const [isSearching, setIsSearching] = useState(false); // State may be used to render a loading spinner on larger data sets
   const [sortOption, setSortOption] = useState("author");
 
   const debouncedQuery = useDebounce(query, 500);
@@ -18,7 +18,7 @@ const App = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        // setIsSearching(true);
+        setIsSearching(true);
         setError("");
 
         if (debouncedQuery === "") {
@@ -41,7 +41,7 @@ const App = () => {
         );
         setBooks([]);
       } finally {
-        // setIsSearching(false);
+        setIsSearching(false);
       }
     };
 

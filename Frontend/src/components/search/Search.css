@@ -26,7 +26,7 @@
 .search__input {
   height: 100%;
   border: none;
-  font-size: 16px;
+  font-size: 1rem;
   padding-left: 20px;
   padding-right: 38px;
   color: #6f768d;
@@ -36,6 +36,8 @@
 
 .search__input::placeholder {
   color: #9fa3b1;
+  font-size: 0.8rem;
+  font-style: italic;
 }
 
 .search__button {

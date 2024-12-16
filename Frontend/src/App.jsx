@@ -16,7 +16,6 @@ const App = () => {
       try {
         const results = await searchQuery(query);
         setBooks(results);
-        console.log("RESULT", results);
       } catch (error) {
         setError("Failed to load books. Please try again later.");
       }

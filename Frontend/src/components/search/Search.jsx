@@ -15,21 +15,18 @@ export const Search = ({ onSearch, sortValue, onSortChange }) => {
   return (
     <form className="search" onSubmit={handleSubmit}>
       <div className="search__bar">
-        <div className="search__bar-container">
-          <SortDropdown value={sortValue} handleChange={onSortChange} />
-          <input
-            className="search__input"
-            type="text"
-            placeholder="Search the library..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-          />
-          <FontAwesomeIcon className="search__icon" icon={faMagnifyingGlass} />
-        </div>
+        <SortDropdown value={sortValue} handleChange={onSortChange} />
+        <input
+          className="search__input"
+          type="text"
+          placeholder="Search the library..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        <button className="search__button" type="submit">
+          <FontAwesomeIcon icon={faMagnifyingGlass} className="search__icon" />
+        </button>
       </div>
-      <button className="search__button" type="submit">
-        Search
-      </button>
     </form>
   );
 };

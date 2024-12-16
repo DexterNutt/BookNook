@@ -10,6 +10,7 @@
   color: #6f768d;
   text-transform: uppercase;
   text-align: left;
+  border-right: 1px solid #9d1b18;
 }
 
 .sort__list {
@@ -48,4 +49,41 @@
 .sort__item:hover {
   background-color: #fff0f0;
   color: #9d1b18;
+}
+
+@media (max-width: 1024px) {
+  .sort {
+    width: 130px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sort {
+    width: 120px;
+  }
+
+  .sort__selected {
+    padding: 0.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sort {
+    width: 100%;
+  }
+
+  .sort::after {
+    right: 0.5rem;
+  }
+
+  .sort__selected {
+    text-align: center;
+    padding-left: 0.5rem;
+    padding-right: 1.5rem;
+    font-size: small;
+  }
+
+  .sort__item {
+    font-size: small;
+  }
 }
